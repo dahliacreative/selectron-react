@@ -30,10 +30,10 @@
     "gulp-sequence": "^0.4.6",
     "gulp-uglify": "^2.1.2",
     "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-source-stream": "^1.1.0",
+    "gulp-livereload": "^3.8.1",
   },
   "dependencies": {
-    "babel-polyfill": "^6.26.0",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
