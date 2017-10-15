@@ -5,7 +5,7 @@ class SelectMultiTrigger extends React.Component {
 
   render() {
     return (
-      <div className="selectron__trigger selectron__trigger--multi" {...this.props} ref={node => { this.button = node }}>
+      <div className="selectron__trigger selectron__trigger--multi" {...this.props} ref={node => { this.button = node }} tabIndex="0">
         { this.props.value && this.props.map(item => (
           <SelectMultiItem onChange={ this.props.onChange } item={ item } />
         ))}

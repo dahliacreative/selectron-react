@@ -21,7 +21,7 @@ class Options extends React.Component {
     const { select } = props
     const style = {
       position: 'absolute',
-      top: select.offsetTop + select.clientHeight,
+      top: select.offsetTop + select.style.height,
       left: select.offsetLeft,
       width: select.clientWidth
     }

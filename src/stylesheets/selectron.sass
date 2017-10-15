@@ -1,0 +1,115 @@
+%font-styles
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif
+    font-size: 14px
+    color: #022B44
+
+.selectron
+    background-color: #FFF
+    border: 1px solid #9B9B9B
+    border-radius: 4px
+    display: inline-block
+    max-width: 300px
+    min-width: 150px
+    position: relative
+    width: 100%
+
+    &--is-focused
+        border-color: #5AADEB
+        box-shadow: 0 0 0 2px rgba(#5AADEB, .25)
+
+    &--is-open
+        border: 1px solid #9B9B9B
+        border-radius: 4px 4px 0 0
+        box-shadow: none
+
+
+    &::after
+        border: 2px solid #9B9B9B
+        border-right: none
+        border-top: none
+        content: ''
+        display: block
+        height: 6px
+        margin-top: -6px
+        pointer-events: none
+        position: absolute
+        right: 12px
+        top: 50%
+        transform: rotate(-45deg)
+        width: 6px
+
+
+    &__trigger
+        @extend %font-styles
+        background-color: transparent
+        border: none
+        box-sizing: border-box
+        cursor: pointer
+        display: block
+        outline: none
+        padding: 10px
+        text-align: left
+        width: 100%
+
+    &__options
+        border: 1px solid #9B9B9B
+        border-radius: 0 0 4px 4px
+        border-top: none
+        display: flex
+        flex-direction: column
+        max-height: 200px
+
+    &__search
+        @extend %font-styles
+        border: none
+        border-bottom: 1px solid rgba(#9B9B9B, .5)
+        font-size: 12px
+        outline: none
+        padding: 10px
+
+    &__list
+        flex: 1
+        margin: 0
+        overflow: auto
+        padding: 0
+
+    &__option
+        @extend %font-styles
+        cursor: pointer
+        font-size: 12px
+        padding: 10px
+
+        &--selected
+            background-color: rgba(#5AADEB, .1)
+
+        &--highlighted
+            background-color: rgba(#5AADEB, .25)
+
+    &__clear
+        background-color: transparent
+        border: 0
+        cursor: pointer
+        font-size: 0
+        height: 30px
+        margin-top: -15px
+        outline: none
+        padding: 0
+        position: absolute
+        right: 20px
+        top: 50%
+        width: 30px
+
+        &::before,
+        &::after
+            background-color: #9B9B9B
+            content: ''
+            height: 2px
+            left: 50%
+            margin: -1px 0 0 -5px
+            position: absolute
+            top: 50%
+            transform: rotate(45deg)
+            width: 10px
+
+        &::after
+            transform: rotate(-45deg)

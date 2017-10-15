@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import SelectTrigger from './SelectTrigger'
 import SelectMultiTrigger from './SelectMultiTrigger'
 import Search from './Search'
@@ -10,6 +11,7 @@ class Select extends React.Component {
     super(props)
     this.state = {
       isOpen: false,
+      isFocused: false,
       options: props.options,
       value: props.value,
       highlighted: props.value || props.options[0],
@@ -20,6 +22,8 @@ class Select extends React.Component {
       'toggleOptions',
       'onKeyDown',
       'onKeyUp',
+      'onFocus',
+      'onBlur',
       'onSearch',
       'multiOnChange'
     ].forEach(fn => this[fn] = this[fn].bind(this))
@@ -62,6 +66,7 @@ class Select extends React.Component {
   }
 
   toggleOptions(e, toggle = !this.state.isOpen) {
+    if (e) e.preventDefault()
     this.setState({
       isOpen: toggle
     })
@@ -69,7 +74,11 @@ class Select extends React.Component {
 
   closeOptions(focus = true) {
     this.toggleOptions(null, false)
-    if (focus) this.focusTrigger()
+    if (focus) {
+      this.focusTrigger()
+    } else {
+      this.setState({ isFocused: false })
+    }
   }
 
   openOptions() {
@@ -101,7 +110,7 @@ class Select extends React.Component {
       case 38: {
         if (!isOpen) {
           this.openOptions()
-        } else if (options.legnth > 0) {
+        } else if (options.length > 0) {
           const currentIndex = options.map(opt => opt.value).indexOf(highlighted.value)
           const nextIndex = currentIndex === 0 ? options.length - 1 : currentIndex - 1
           this.setState({
@@ -113,7 +122,7 @@ class Select extends React.Component {
       case 40: {
         if (!isOpen) {
           this.openOptions()
-        } else if (options.legnth > 0) {
+        } else if (options.length > 0) {
           const currentIndex = options.map(opt => opt.value).indexOf(highlighted.value)
           const nextIndex = currentIndex === options.length - 1 ? 0 : currentIndex + 1
           this.setState({
@@ -133,7 +142,7 @@ class Select extends React.Component {
       case 13: {
         if(!isOpen) {
           return false
-        } else {
+        } else if (this.state.options) {
           this.setState({
             options,
             searchTerm: ''
@@ -142,6 +151,19 @@ class Select extends React.Component {
         }
       }
     }
+  }
+
+  onFocus() {
+    this.setState({ isFocused: true })
+  }
+
+  onBlur() {
+    this.setState({ isFocused: false }, () => {
+      const focused = document.activeElement
+      if (!this.search || ((this.search && focused !== this.search.input) && focused !== this.trigger.button)) {
+        this.closeOptions(false)
+      }
+    })
   }
 
   onSearch({target}) {
@@ -187,14 +209,16 @@ class Select extends React.Component {
 
   render() {
     const { placeholder, multi, clearable, searchable } = this.props
-    const { isOpen, value, highlighted, options, searchTerm } = this.state
+    const { isOpen, isFocused, value, highlighted, options, searchTerm } = this.state
     const onChange = multi ? this.multiOnChange : this.props.onChange
 
     const triggerProps = {
       onChange: multi ? onChange : null,
-      onClick: this.toggleOptions,
+      onMouseDown: this.toggleOptions,
       onKeyDown: this.onKeyDown,
       onKeyUp: this.onKeyUp,
+      onFocus: this.onFocus,
+      onBlur: this.onBlur,
       value: value,
       placeholder: placeholder,
       ref: node => { this.trigger = node }
@@ -206,29 +230,39 @@ class Select extends React.Component {
       onChange: this.onSearch,
       onKeyDown: this.onKeyDown,
       onKeyUp: this.onKeyUp,
+      onFocus: this.onFocus,
+      onBlur: this.onBlur,
       value: searchTerm
     }
 
+    const classes = ['selectron']
+    if (isOpen) classes.push('is-open')
+    if (isFocused) classes.push('is-focused')
+
     return (
-      <div className="selectron" ref={node => { this.select = node }}>
+      <div className={ classes.join(' selectron--')} ref={node => { this.select = node }}>
         <Trigger {...triggerProps} />
         { value && clearable &&
-          <button type="button" className="selectron__clear" onClick={() => { onChange(null) }}>Clear</button>
+          <button type="button" className="selectron__clear"
+            onMouseDown={(e) => {
+              e.preventDefault()
+              onChange(null)
+            }}>Clear</button>
         }
         { isOpen &&
           <Options select={ this.select } ref={node => { this.options = node }}>
             { searchable &&
-              <Search {...searchProps} />
+              <Search {...searchProps} ref={node => { this.search = node }}/>
             }
             <ul className="selectron__list">
-              { options.length > 1 &&
+              { options.length < 1 &&
                 <li className="seectron__no-results">No results</li>
               }
               { options.map(option => {
                 const isSelected = value ? option.value === value.value : false
                 const isHighlighted = option.value === highlighted.value
                 return (
-                  <Option key={ option.value } option={ option } onChange={ onChange } highlighted={ isHighlighted } selected={ isSelected } onMouseEnter={() => { this.setState({ highlighted: option }) }} />
+                  <Option key={ option.value } option={ option } onSelect={ onChange } highlighted={ isHighlighted } selected={ isSelected } onMouseEnter={() => { this.setState({ highlighted: option }) }} />
                 )
               })}
             </ul>

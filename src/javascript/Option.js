@@ -9,7 +9,11 @@ class Option extends React.Component {
     const classNames = classes.join(' selectron__option--')
 
     return(
-      <li className={ classNames } onClick={() => { onSelect(options) }} onMouseEnter={ onMouseEnter }>{ option.label }</li>
+      <li className={ classNames }
+        onMouseDown={(e) => {
+          e.preventDefault()
+          onSelect(option) }}
+        onMouseEnter={ onMouseEnter }>{ option.label }</li>
     )
   }
 }
