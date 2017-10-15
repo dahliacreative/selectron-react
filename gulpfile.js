@@ -50,10 +50,9 @@ gulp.task('examples', () =>
 
 gulp.task('watch', () => {
   livereload.listen()
-  gulp.watch('src/javascript/**/*.js', () => {
-    sequence('javascript', 'examples')
-  })
-  gulp.watch('src/stylesheets/**/*.sass', ['stylesheets'])
+  gulp.watch('src/javascript/*.js', ['javascript'])
+  gulp.watch('lib/*.js', ['examples'])
+  gulp.watch('src/stylesheets/*.sass', ['stylesheets'])
 })
 
 gulp.task('default', sequence('clean', ['stylesheets', 'javascript'], 'examples', 'watch'))
