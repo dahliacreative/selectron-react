@@ -256,13 +256,13 @@ class Select extends React.Component {
             }
             <ul className="selectron__list">
               { options.length < 1 &&
-                <li className="seectron__no-results">No results</li>
+                <li className="selectron__option selectron__option--empty">No results</li>
               }
               { options.map(option => {
                 const isSelected = value ? option.value === value.value : false
                 const isHighlighted = option.value === highlighted.value
                 return (
-                  <Option key={ option.value } option={ option } onSelect={ onChange } highlighted={ isHighlighted } selected={ isSelected } onMouseEnter={() => { this.setState({ highlighted: option }) }} />
+                  <Option key={ option.value } option={ option } term={ this.state.searchTerm } onSelect={ onChange } highlighted={ isHighlighted } selected={ isSelected } onMouseEnter={() => { this.setState({ highlighted: option }) }} />
                 )
               })}
             </ul>
