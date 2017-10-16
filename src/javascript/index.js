@@ -48,7 +48,11 @@ Selectron.defaultProps = {
   multi: false,
   placeholder: 'Please select...',
   required: false,
-  searchable: true
+  searchable: true,
+  required: false,
+  onChange: () => {},
+  options: [],
+  value: null
 }
 
 export default Selectron

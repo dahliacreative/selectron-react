@@ -2,9 +2,184 @@
 <html>
   <head>
     <link rel="stylesheet" href="../lib/selectron.css">
+    <style>
+        body {
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color: #022B44;
+            margin: 0;
+        }
+        h1 {
+            font-weight: normal;
+            font-size: 20px;
+            margin-top: 60px;
+            margin-bottom: 10px;
+        }
+        h1:first-child {
+            margin-top: 0;
+        }
+        .selectron {
+            max-width: none
+        }
+        dl {
+            margin: 0 0 10px;
+            padding: 0;
+        }
+        dt {
+            font-weight: bold;
+            color: #5AADEB;
+        }
+        dd {
+            margin: 0;
+            font-size: 12px;
+            color: #9B9B9B;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td,th {
+            border: 1px solid #9B9B9B;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #022B44;
+            border-color: #022B44;
+            border-right-color: #efefef;
+            color: #fff;
+        }
+        th:last-child {
+            border-right-color: #022B44
+        }
+        header {
+            background-color: #022B44;
+            color: #fff;
+            padding: 60px 20px;
+        }
+        header h1 {
+            color: #5AADEB;
+            font-size: 50px;
+            margin: 0;
+        }
+        header p {
+            font-size: 20px;
+            margin: 0;
+        }
+    </style>
   </head>
   <body>
-    <div id="app"></div>
+    <header>
+        <div style="max-width: 400px; margin: 0 auto;">
+            <h1>React Selectron</h1>
+            <p>A react select alternative</p>
+        </div>
+    </header>
+    <div style="max-width: 400px; margin: 0 auto; padding: 60px 20px;">
+        <h1>Default Select</h1>
+        <dl>
+            <dt>Props</dt>
+            <dd>options, value, onChange</dd>
+        </dl>
+        <div id="default"></div>
+        <h1>Default Select, ajaxed options</h1>
+        <dl>
+            <dt>Props</dt>
+            <dd>options, value, onChange, onSearch</dd>
+        </dl>
+        <div id="default-ajax"></div>
+        <h1>Multi Select</h1>
+        <dl>
+            <dt>Props</dt>
+            <dd>multi, options, value, onChange</dd>
+        </dl>
+        <div id="multi"></div>
+        <h1>Multi Select, ajaxed options</h1>
+        <dl>
+            <dt>Props</dt>
+            <dd>multi, options, value, onChange, onSearch</dd>
+        </dl>
+        <div id="multi-ajax"></div>
+    </div>
+     <div style="background-color: #efefef; padding: 60px 20px;">
+         <div style="max-width: 900px; margin: 0 auto;">
+             <h1>Options</h1>
+                <table>
+                    <thead>
+                        <th>Prop</th>
+                        <th>Type</th>
+                        <th>Required</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>options</code></td>
+                            <td><code>array</code></td>
+                            <td>Yes</td>
+                            <td><code>[]</code></td>
+                            <td>an array of option objects, requires <code>value</code> and <code>label</code> params</td>
+                        </tr>
+                        <tr>
+                            <td><code>value</code></td>
+                            <td><code>object</code> / <code>array</code></td>
+                            <td>No</td>
+                            <td><code>null</code></td>
+                            <td>an option object / array of option objects, requires <code>value</code> and <code>label</code> params</td>
+                        </tr>
+                        <tr>
+                            <td><code>onChange</code></td>
+                            <td><code>function</code></td>
+                            <td>Yes</td>
+                            <td><code>() => {}</code></td>
+                            <td>a function to be called when the select changes, recieves <code>value</code> as param</td>
+                        </tr>
+                        <tr>
+                            <td><code>onSearch</code></td>
+                            <td><code>function</code></td>
+                            <td>No</td>
+                            <td></td>
+                            <td>a function to be called when the user searches, recieves <code>term</code> as param. used for ajaxing in options</td>
+                        </tr>
+                        <tr>
+                            <td><code>multi</code></td>
+                            <td><code>bool</code></td>
+                            <td>No</td>
+                            <td><code>false</code></td>
+                            <td>allow multiple options</td>
+                        </tr>
+                        <tr>
+                            <td><code>placeholder</code></td>
+                            <td><code>string</code></td>
+                            <td>No</td>
+                            <td>Please select...</td>
+                            <td>placeholder to display</td>
+                        </tr>
+                        <tr>
+                            <td><code>clearable</code></td>
+                            <td><code>bool</code></td>
+                            <td>No</td>
+                            <td><code>true</code></td>
+                            <td>wether the user can clear the select once an option is sselected</td>
+                        </tr>
+                        <tr>
+                            <td><code>searchable</code></td>
+                            <td><code>bool</code></td>
+                            <td>No</td>
+                            <td><code>true</code></td>
+                            <td>wether the user can search to filter the list</td>
+                        </tr>
+                        <tr>
+                            <td><code>required</code></td>
+                            <td><code>bool</code></td>
+                            <td>No</td>
+                            <td><code>false</code></td>
+                            <td>adds HTML5 required attribute to inputs</td>
+                        </tr>
+                    </tbody>
+                </table>
+         </div>
+     </div>
     <script src="examples.js"></script>
   </body>
 </html>

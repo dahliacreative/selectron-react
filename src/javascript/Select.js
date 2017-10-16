@@ -58,7 +58,8 @@ class Select extends React.Component {
     } else if (options !== currentOptions) {
       this.setState({
         options: newOptions,
-        highlighted: newOptions[0]
+        highlighted: newOptions[0],
+        loading: false
       })
     } else {
       this.closeOptions()
@@ -170,10 +171,15 @@ class Select extends React.Component {
   onSearch({target}) {
     const { onSearch, options, multi, value } = this.props
     if (onSearch) {
+      clearTimeout(this.ajaxTimer)
       this.setState({
-        searchTerm: target.value
+        searchTerm: target.value,
+        options: [],
+        loading: true
       })
-      onSearch(target.value)
+      this.ajaxTimer = setTimeout(() => {
+        onSearch(target.value)
+      }, 500)
       return false
     }
     let newOptions = options
@@ -210,7 +216,7 @@ class Select extends React.Component {
 
   render() {
     const { placeholder, multi, clearable, searchable } = this.props
-    const { isOpen, isFocused, value, highlighted, options, searchTerm } = this.state
+    const { isOpen, isFocused, value, highlighted, options, searchTerm, loading } = this.state
     const onChange = multi ? this.multiOnChange : this.props.onChange
 
     const triggerProps = {
@@ -260,7 +266,7 @@ class Select extends React.Component {
             }
             <ul className="selectron__list">
               { options.length < 1 &&
-                <li className="selectron__option selectron__option--empty">No results</li>
+                <li className="selectron__option selectron__option--empty">{ loading ? "Loading..." : "No results" }</li>
               }
               { options.map(option => {
                 const isSelected = value ? option.value === value.value : false
