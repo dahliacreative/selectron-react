@@ -78,17 +78,21 @@
 
     &__search
         @extend %font-styles
+        background-color: transparent
         border: none
-        border-bottom: 1px solid rgba(#9B9B9B, .5)
         font-size: 12px
         outline: none
         padding: 10px
 
     &__list
+        border-top: 1px solid rgba(#9B9B9B, .5)
         flex: 1
         margin: 0
         overflow: auto
         padding: 0
+
+        &:empty
+            border-top: none
 
     &__option
         @extend %font-styles

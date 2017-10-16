@@ -57,12 +57,8 @@ class DefaultAjax extends React.Component {
       options: []
     }
   }
-  handleSearch(term) {
-    console.log(term)
-    // Fake ajax request
-    setTimeout(() => {
-        this.setState({
-        options: [{
+  returnOptions(term) {
+    const options = [{
                 value: 1,
                 label: 'Option 1'
               },{
@@ -93,8 +89,16 @@ class DefaultAjax extends React.Component {
                 value: 10,
                 label: 'Option 10'
               }]
+    return options.filter(opt => opt.label.toLowerCase().includes(term.toLowerCase()))
+  }
+  handleSearch(term) {
+    console.log(term)
+    // Fake ajax request
+    setTimeout(() => {
+        this.setState({
+        options: this.returnOptions(term)
         })
-    }, 1000)
+    }, 500)
   }
   render() {
     return <Selectron
@@ -163,12 +167,8 @@ class MultiAjax extends React.Component {
       options: []
     }
   }
-  handleSearch(term) {
-    console.log(term)
-    // Fake ajax request
-    setTimeout(() => {
-        this.setState({
-        options: [{
+  returnOptions(term) {
+    const options = [{
                 value: 1,
                 label: 'Option 1'
               },{
@@ -199,8 +199,16 @@ class MultiAjax extends React.Component {
                 value: 10,
                 label: 'Option 10'
               }]
+    return options.filter(opt => opt.label.toLowerCase().includes(term.toLowerCase()))
+  }
+  handleSearch(term) {
+    console.log(term)
+    // Fake ajax request
+    setTimeout(() => {
+        this.setState({
+        options: this.returnOptions(term)
         })
-    }, 1000)
+    }, 500)
   }
   render() {
     return <Selectron

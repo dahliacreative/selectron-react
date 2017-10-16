@@ -15,7 +15,8 @@ class Select extends React.Component {
       options: props.options,
       value: props.value,
       highlighted: props.value || props.options[0],
-      searchTerm: ''
+      searchTerm: '',
+      displayNoResults: false
     }
     const methods = [
       'clickOutside',
@@ -52,14 +53,17 @@ class Select extends React.Component {
       this.setState({
         value,
         options: newOptions,
-        highlighted: value || newOptions[0]
+        highlighted: multi ? this.state.highlighted : value
       })
-      this.closeOptions()
+      if ((!nextProps.onSearch && !nextProps.multi) || newOptions.length < 1 || (nextProps.onSearch && !nextProps.multi)) {
+        this.closeOptions()
+      }
     } else if (options !== currentOptions) {
       this.setState({
         options: newOptions,
         highlighted: newOptions[0],
-        loading: false
+        loading: false,
+        displayNoResults: true
       })
     } else {
       this.closeOptions()
@@ -175,7 +179,8 @@ class Select extends React.Component {
       this.setState({
         searchTerm: target.value,
         options: [],
-        loading: true
+        loading: true,
+        displayNoResults: false
       })
       this.ajaxTimer = setTimeout(() => {
         onSearch(target.value)
@@ -190,7 +195,8 @@ class Select extends React.Component {
     this.setState({
       searchTerm: target.value,
       options: newOptions,
-      highlight: newOptions[0]
+      highlight: newOptions[0],
+      displayNoResults: true
     })
   }
 
@@ -209,14 +215,23 @@ class Select extends React.Component {
       }
       onChange(newValue)
     } else {
+      const { options } = this.state
       currentValue.push(value)
-      onChange(currentValue.slice(0))
+      if (options.length > 1) {
+        const index = options.findIndex(opt => opt.value === value.value)
+        const newHighlight = options[index + 1]
+        this.setState({ highlighted: newHighlight }, () => {
+          onChange(currentValue.slice(0))
+        })
+      } else {
+        onChange(currentValue.slice(0))
+      }
     }
   }
 
   render() {
     const { placeholder, multi, clearable, searchable } = this.props
-    const { isOpen, isFocused, value, highlighted, options, searchTerm, loading } = this.state
+    const { isOpen, isFocused, value, highlighted, options, searchTerm, loading, displayNoResults } = this.state
     const onChange = multi ? this.multiOnChange : this.props.onChange
 
     const triggerProps = {
@@ -268,7 +283,7 @@ class Select extends React.Component {
               <Search {...searchProps} ref={node => { this.search = node }}/>
             }
             <ul className="selectron__list">
-              { options.length < 1 &&
+              { options.length < 1 && displayNoResults &&
                 <li className="selectron__option selectron__option--empty">{ loading ? "Loading..." : "No results" }</li>
               }
               { options.map(option => {
