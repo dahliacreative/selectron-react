@@ -9,6 +9,7 @@ import Option from './option'
 class Select extends React.Component {
   constructor(props) {
     super(props)
+    this.option = {}
     this.state = {
       isOpen: false,
       isFocused: false,
@@ -121,6 +122,17 @@ class Select extends React.Component {
           const nextIndex = currentIndex === 0 ? options.length - 1 : currentIndex - 1
           this.setState({
             highlighted: options[nextIndex]
+          }, () => {
+            const item = this[`option-${this.state.highlighted.value}`].option
+            const itemTop = item.offsetTop
+            const listTop = this.list.scrollTop
+            if (nextIndex === options.length - 1) {
+              const scrollTo = this.list.scrollHeight
+              this.list.scrollTop = scrollTo
+            } else if (itemTop < listTop) {
+              const scrollTo = itemTop
+              this.list.scrollTop = scrollTo
+            }
           })
         }
         break
@@ -133,6 +145,14 @@ class Select extends React.Component {
           const nextIndex = currentIndex === options.length - 1 ? 0 : currentIndex + 1
           this.setState({
             highlighted: options[nextIndex]
+          }, () => {
+            const item = this[`option-${this.state.highlighted.value}`].option
+            const itemBottom = item.offsetTop + item.offsetHeight
+            const listBottom = this.list.offsetHeight - this.list.scrollTop
+            if (itemBottom > listBottom) {
+              const scrollTo = item.offsetTop - (this.list.offsetHeight - item.offsetHeight)
+              this.list.scrollTop = scrollTo
+            }
           })
         }
         break
@@ -282,7 +302,7 @@ class Select extends React.Component {
             { searchable &&
               <Search {...searchProps} ref={node => { this.search = node }}/>
             }
-            <ul className="selectron__list">
+            <ul className="selectron__list" ref={node => { this.list = node }}>
               { options.length < 1 && displayNoResults &&
                 <li className="selectron__option selectron__option--empty">{ loading ? "Loading..." : "No results" }</li>
               }
@@ -290,7 +310,7 @@ class Select extends React.Component {
                 const isSelected = value ? option.value === value.value : false
                 const isHighlighted = option.value === highlighted.value
                 return (
-                  <Option key={ option.value } option={ option } term={ this.state.searchTerm } onSelect={ onChange } highlighted={ isHighlighted } selected={ isSelected } onMouseEnter={() => { this.setState({ highlighted: option }) }} />
+                  <Option key={ option.value } option={ option } term={ this.state.searchTerm } onSelect={ onChange } highlighted={ isHighlighted } selected={ isSelected } onMouseEnter={() => { this.setState({ highlighted: option }) }} ref={node => { this[`option-${option.value}`] = node }} />
                 )
               })}
             </ul>

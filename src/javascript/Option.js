@@ -14,7 +14,8 @@ class Option extends React.Component {
           e.preventDefault()
           onSelect(option) }}
         onMouseEnter={ onMouseEnter }
-        dangerouslySetInnerHTML={{ __html: option.label.replace(regex, '<b>$1</b>') }}></li>
+        dangerouslySetInnerHTML={{ __html: option.label.replace(regex, '<b>$1</b>') }}
+        ref={node => { this.option = node }}></li>
     )
   }
 }
