@@ -252,12 +252,15 @@ class Select extends React.Component {
     return (
       <div className={ classes.join(' selectron--')} ref={node => { this.select = node }}>
         <Trigger {...triggerProps} />
-        { value && clearable &&
+        { value && clearable && !loading &&
           <button type="button" className="selectron__clear"
             onMouseDown={(e) => {
               e.preventDefault()
               onChange(null)
             }}>Clear</button>
+        }
+        { loading &&
+            <div className="selectron__spinner"></div>
         }
         { isOpen &&
           <Options select={ this.select } ref={node => { this.options = node }}>

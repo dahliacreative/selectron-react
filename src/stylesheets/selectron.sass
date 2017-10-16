@@ -174,3 +174,34 @@
 
         &::after
             transform: rotate(-45deg)
+
+    &__spinner
+        border: 2px solid rgba(#9B9B9B, .25)
+        border-radius: 50%
+        box-sizing: border-box
+        height: 16px
+        margin-top: -8px
+        position: absolute
+        right: 27px
+        top: 50%
+        width: 16px
+
+        &::after
+            animation: spin infinite 1s
+            border: 2px solid transparent
+            border-radius: 50%
+            border-right-color: #9B9B9B
+            box-sizing: border-box
+            content: ''
+            height: 16px
+            left: 50%
+            margin: -8px 0 0 -8px
+            position: absolute
+            top: 50%
+            width: 16px
+
+@keyframes spin
+    from
+        transform: rotate(0)
+    to
+        transform: rotate(360deg)
