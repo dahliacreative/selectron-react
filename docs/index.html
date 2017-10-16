@@ -2,11 +2,13 @@
 <html>
   <head>
     <link rel="stylesheet" href="selectron.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
     <style>
         body {
-            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-family: Open Sans, sans-serif;
             font-size: 14px;
-            color: #022B44;
+            font-weight: 400;
+            color: #263238;
             margin: 0;
         }
         h1 {
@@ -14,6 +16,7 @@
             font-size: 20px;
             margin-top: 60px;
             margin-bottom: 10px;
+            font-weight: 400;
         }
         h1:first-child {
             margin-top: 0;
@@ -26,8 +29,8 @@
             padding: 0;
         }
         dt {
-            font-weight: bold;
-            color: #5AADEB;
+            font-weight: 400;
+            color: #FE5E64;
         }
         dd {
             margin: 0;
@@ -39,32 +42,33 @@
             border-collapse: collapse;
         }
         td,th {
-            border: 1px solid #9B9B9B;
+            border: 1px solid #FE5E64;
             padding: 10px;
             text-align: left;
         }
         th {
-            background-color: #022B44;
-            border-color: #022B44;
-            border-right-color: #efefef;
+            background-color: #FE5E64;
             color: #fff;
-        }
-        th:last-child {
-            border-right-color: #022B44
+            font-weight: 300;
         }
         header {
-            background-color: #022B44;
+            background-color: #FE5E64;
             color: #fff;
             padding: 60px 20px;
         }
         header h1 {
-            color: #5AADEB;
-            font-size: 50px;
+            font-size: 56px;
+            font-weight: 300;
             margin: 0;
         }
         header p {
             font-size: 20px;
+            font-weight: 300;
             margin: 0;
+            color: rgba(255,255,255,.75);
+        }
+        header p em {
+            font-weight: 400;
         }
     </style>
   </head>
@@ -72,7 +76,7 @@
     <header>
         <div style="max-width: 400px; margin: 0 auto;">
             <h1>React Selectron</h1>
-            <p>A react select alternative</p>
+            <p>A <em>simple</em> select replacement component built with &amp; for React.Js</p>
         </div>
     </header>
     <div style="max-width: 400px; margin: 0 auto; padding: 60px 20px;">

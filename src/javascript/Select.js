@@ -53,7 +53,7 @@ class Select extends React.Component {
       this.setState({
         value,
         options: newOptions,
-        highlighted: multi ? this.state.highlighted : value
+        highlighted: multi ? this.state.highlighted : (value || newOptions[0])
       })
       if ((!nextProps.onSearch && !nextProps.multi) || newOptions.length < 1 || (nextProps.onSearch && !nextProps.multi)) {
         this.closeOptions()

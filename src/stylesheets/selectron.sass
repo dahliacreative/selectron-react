@@ -1,25 +1,31 @@
+$base: #9B9B9B
+$brand-dark: #263238
+$brand: #FE5E64
+$white: #fff
+$transition-duration: .2s
+
 %font-styles
+    color: $brand-dark
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif
     font-size: 14px
-    color: #022B44
 
 .selectron
-    background-color: #FFF
-    border: 1px solid #9B9B9B
+    background-color: $white
+    border: 1px solid $base
     border-radius: 4px
     display: inline-block
     max-width: 300px
     min-width: 150px
     position: relative
-    transition: border-color .2s, box-shadow .2s
+    transition: border-color $transition-duration, box-shadow $transition-duration
     width: 100%
 
     &--is-focused
-        border-color: #5AADEB
-        box-shadow: 0 0 0 2px rgba(#5AADEB, .25)
+        border-color: $brand
+        box-shadow: 0 0 0 2px rgba($brand, .25)
 
     &--is-open
-        border: 1px solid #9B9B9B
+        border: 1px solid $base
         border-radius: 4px 4px 0 0
         box-shadow: none
 
@@ -28,6 +34,10 @@
             align-items: center
             display: flex
             flex-wrap: wrap
+
+    &--is-filled &
+        &__trigger
+            color: $brand-dark
 
     &.selectron--multiple.selectron--is-filled
         .selectron__trigger
@@ -40,7 +50,7 @@
             padding-right: 45px
 
     &::after
-        border: 2px solid #9B9B9B
+        border: 2px solid $base
         border-right: none
         border-top: none
         content: ''
@@ -60,6 +70,7 @@
         background-color: transparent
         border: none
         box-sizing: border-box
+        color: $base
         cursor: pointer
         display: block
         outline: none
@@ -68,8 +79,8 @@
         width: 100%
 
     &__options
-        background-color: #FFF
-        border: 1px solid #9B9B9B
+        background-color: $white
+        border: 1px solid $base
         border-radius: 0 0 4px 4px
         border-top: none
         display: flex
@@ -81,12 +92,13 @@
         @extend %font-styles
         background-color: transparent
         border: none
+        color: $brand-dark
         font-size: 12px
         outline: none
         padding: 10px
 
     &__list
-        border-top: 1px solid rgba(#9B9B9B, .5)
+        border-top: 1px solid rgba($base, .5)
         flex: 1
         margin: 0
         overflow: auto
@@ -100,23 +112,24 @@
         cursor: pointer
         font-size: 12px
         padding: 10px
-        transition: background-color .2s
+        transition: background-color $transition-duration, color $transition-duration
 
         &--empty
             font-style: italic
 
         &--selected
-            background-color: rgba(#5AADEB, .1)
+            background-color: rgba($brand, .1)
 
         &--highlighted
-            background-color: rgba(#5AADEB, .25)
+            background-color: rgba($brand, .25)
+            color: $brand
 
     &__item
         @extend %font-styles
-        background-color: rgba(#5AADEB, .1)
-        border: 1px solid #5AADEB
+        background-color: rgba($brand, .1)
+        border: 1px solid $brand
         border-radius: 2px
-        color: #5AADEB
+        color: $brand
         display: flex
         font-size: 12px
         margin-bottom: 5px
@@ -125,25 +138,25 @@
         &-remove
             background-color: transparent
             border: none
-            border-right: 1px solid #5AADEB
+            border-right: 1px solid $brand
             cursor: pointer
             font-size: 0
             min-width: 18px
             outline: 0
             padding: 0
             position: relative
-            transition: background-color .2s
+            transition: background-color $transition-duration
 
             &:hover
-                background-color: #5AADEB
+                background-color: $brand
 
                 &::before,
                 &::after
-                    background-color: #FFF
+                    background-color: $white
 
             &::before,
             &::after
-                background-color: #5AADEB
+                background-color: $brand
                 content: ''
                 height: 2px
                 left: 50%
@@ -151,7 +164,7 @@
                 position: absolute
                 top: 50%
                 transform: rotate(45deg)
-                transition: background-color .2s
+                transition: background-color $transition-duration
                 width: 8px
 
             &::after
@@ -178,7 +191,7 @@
 
         &::before,
         &::after
-            background-color: #9B9B9B
+            background-color: $base
             content: ''
             height: 2px
             left: 50%
@@ -192,7 +205,7 @@
             transform: rotate(-45deg)
 
     &__spinner
-        border: 2px solid rgba(#9B9B9B, .25)
+        border: 2px solid rgba($base, .25)
         border-radius: 50%
         box-sizing: border-box
         height: 16px
@@ -206,7 +219,7 @@
             animation: spin infinite 1s
             border: 2px solid transparent
             border-radius: 50%
-            border-right-color: #9B9B9B
+            border-right-color: $base
             box-sizing: border-box
             content: ''
             height: 16px
@@ -219,5 +232,6 @@
 @keyframes spin
     from
         transform: rotate(0)
+
     to
         transform: rotate(360deg)
