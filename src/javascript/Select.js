@@ -74,6 +74,7 @@ class Select extends React.Component {
 
   closeOptions(focus = true) {
     this.toggleOptions(null, false)
+    this.setState({ searchTerm: '' })
     if (focus) {
       this.focusTrigger()
     } else {
