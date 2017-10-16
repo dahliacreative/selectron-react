@@ -17,7 +17,7 @@ class SelectMultiItem extends React.Component {
   render() {
     return(
       <div className="selectron__item">
-        <button type="button" className="selectron__item-remove" onMouseDown={ this.removeItem }>x</button>
+        <button type="button" className="selectron__item-remove" onMouseDown={ this.removeItem } tabIndex="-1">x</button>
         <span className="selectron__item-copy">{ this.props.item.label }</span>
       </div>
     )
