@@ -92,7 +92,7 @@ class Select extends React.Component {
   }
 
   clickOutside(e) {
-    if (!this.state.isOpen || (this.select.contains(e.target) || this.options.wrapper.contains(e.target))) return
+    if (this.select.contains(e.target) || (this.options && this.options.wrapper.contains(e.target))) return
     this.closeOptions(false)
   }
 
