@@ -23,6 +23,7 @@ gulp.task('stylesheets', () =>
     .pipe(minifycss())
     .pipe(autoprefixer({ browsers: ['last 2 versions'] }))
     .pipe(gulp.dest('lib'))
+    .pipe(gulp.dest('docs'))
     .pipe(livereload())
 )
 
