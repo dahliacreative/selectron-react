@@ -239,6 +239,9 @@ class Select extends React.Component {
     const classes = ['selectron']
     if (isOpen) classes.push('is-open')
     if (isFocused) classes.push('is-focused')
+    if (clearable) classes.push('is-clearable')
+    if (multi) classes.push('multiple')
+    if (value) classes.push('is-filled')
 
     return (
       <div className={ classes.join(' selectron--')} ref={node => { this.select = node }}>

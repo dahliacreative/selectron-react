@@ -22,6 +22,21 @@
         border-radius: 4px 4px 0 0
         box-shadow: none
 
+    &--multiple &
+        &__trigger
+            align-items: center
+            display: flex
+            flex-wrap: wrap
+
+    &.selectron--multiple.selectron--is-filled
+        .selectron__trigger
+            margin-bottom: -5px
+            min-height: 41px
+            padding: 5px
+
+    &.selectron--multiple.selectron--is-clearable
+        .selectron__trigger
+            padding-right: 45px
 
     &::after
         border: 2px solid #9B9B9B
@@ -87,6 +102,46 @@
 
         &--highlighted
             background-color: rgba(#5AADEB, .25)
+
+    &__item
+        @extend %font-styles
+        background-color: rgba(#5AADEB, .1)
+        border: 1px solid #5AADEB
+        border-radius: 2px
+        color: #5AADEB
+        display: flex
+        font-size: 12px
+        margin-bottom: 5px
+        margin-right: 5px
+
+        &-remove
+            background-color: transparent
+            border: none
+            border-right: 1px solid #5AADEB
+            font-size: 0
+            min-width: 18px
+            padding: 0
+            position: relative
+
+            &::before,
+            &::after
+                background-color: #5AADEB
+                content: ''
+                height: 2px
+                left: 50%
+                margin: -1px 0 0 -4px
+                position: absolute
+                top: 50%
+                transform: rotate(45deg)
+                width: 8px
+
+            &::after
+                transform: rotate(-45deg)
+
+        &-copy
+            align-self: center
+            line-height: 1.2
+            padding: 2px 5px
 
     &__clear
         background-color: transparent

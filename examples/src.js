@@ -43,7 +43,8 @@ class App extends React.Component {
                 label: 'Option 10'
               }]}
               value={ this.state.value }
-              onChange={(value) => { this.setState({value}) }}/>
+              onChange={(value) => { this.setState({value}) }}
+              multi={ true }/>
   }
 }
 
