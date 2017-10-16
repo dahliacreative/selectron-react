@@ -35,7 +35,7 @@ gulp.task('javascript', () =>
 )
 
 gulp.task('examples', () =>
-  browserify({ entries: ['examples/src.js'], debug: true })
+  browserify({ entries: ['docs/src.js'], debug: true })
     .transform(babelify, { presets: ['react', 'es2015'] })
     .bundle()
     .on('error', (err) => {
@@ -44,7 +44,7 @@ gulp.task('examples', () =>
     .pipe(vinylSourceStream('examples.js'))
     .pipe(vinylBuffer())
     .pipe(uglify())
-    .pipe(gulp.dest('examples'))
+    .pipe(gulp.dest('docs'))
     .pipe(livereload())
 )
 
