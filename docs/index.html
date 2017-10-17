@@ -25,6 +25,17 @@
         .selectron {
             max-width: none
         }
+        .container {
+            max-width: 400px;
+            padding: 60px 10px;
+            margin: 0 auto;
+        }
+        .container--wide {
+            max-width: 900px;
+        }
+        .container--medium {
+            max-width: 600px;
+        }
         dl {
             margin: 0 0 10px;
             padding: 0;
@@ -41,6 +52,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
+            background-color: #fff;
         }
         td,th {
             border: 1px solid #FE5E64;
@@ -55,7 +67,6 @@
         header {
             background-color: #FE5E64;
             color: #fff;
-            padding: 60px 20px;
         }
         header h1 {
             font-size: 56px;
@@ -65,22 +76,74 @@
         header p {
             font-size: 20px;
             font-weight: 300;
-            margin: 0;
+            margin: 0 0 20px;
             color: rgba(255,255,255,.75);
         }
         header p em {
             font-weight: 400;
         }
+        .github-button {
+            display: none;
+        }
+        footer {
+            background-color: #263238;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+        .code {
+            background-color: #263238;
+            color: #fff;
+            padding: 10px;
+            overflow: auto;
+        }
+        pre {
+            margin: 0;
+        }
     </style>
   </head>
   <body>
     <header>
-        <div style="max-width: 400px; margin: 0 auto;">
+        <div class="container">
             <h1>React Selectron</h1>
             <p>A <em>simple</em> select replacement component built with &amp; for React.Js</p>
+            <a class="github-button" href="https://github.com/dahliacreative" data-show-count="true" aria-label="Follow @dahliacreative on GitHub">Follow @dahliacreative</a>
+            <a class="github-button" href="https://github.com/dahliacreative/react-selectron/subscription" data-show-count="true" aria-label="Watch dahliacreative/react-selectron on GitHub">Watch</a>
+            <a class="github-button" href="https://github.com/dahliacreative/react-selectron" data-show-count="true" aria-label="Star dahliacreative/react-selectron on GitHub">Star</a>
+            <a class="github-button" href="https://github.com/dahliacreative/react-selectron/fork" data-show-count="true" aria-label="Fork dahliacreative/react-selectron on GitHub">Fork</a>
+            <a class="github-button" href="https://github.com/dahliacreative/react-selectron/issues" data-show-count="true" aria-label="Issue dahliacreative/react-selectron on GitHub">Issue</a>
         </div>
     </header>
-    <div style="max-width: 400px; margin: 0 auto; padding: 60px 20px;">
+    <div class="container container--medium">
+        <h1>Installation</h1>
+        <p class="code"><code>npm install react-selectron</code></p>
+        or
+        <p class="code"><code>yarn add react-selectron</code></p>
+    </div>
+    <div style="background-color: #efefef;">
+        <div class="container container--medium">
+            <h1>Usage</h1>
+<div class="code">
+    <pre><code>&lt;Selectron
+        options={[{
+            value: 'England',
+            label: 'England'
+        },{
+            value: 'Wales',
+            label: 'Wales'
+        },{
+            value: 'Scotland,
+            label: 'Scotland'
+        },{
+            value: 'Northern Ireland',
+            label: 'Northern Ireland'
+        }]}
+        onChange={(value) => {this.setState({value})}}
+        value={this.state.value}/></code></pre>
+</div>
+        </div>
+    </div>
+    <div class="container">
         <h1>Default Select</h1>
         <dl>
             <dt>Props</dt>
@@ -106,92 +169,94 @@
         </dl>
         <div id="multi-ajax"></div>
     </div>
-     <div style="background-color: #efefef; padding: 60px 20px;">
-         <div style="max-width: 900px; margin: 0 auto;">
-             <h1>Options</h1>
-                <table>
-                    <thead>
-                        <th>Prop</th>
-                        <th>Type</th>
-                        <th>Required</th>
-                        <th>Default</th>
-                        <th>Description</th>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><code>options</code></td>
-                            <td><code>array</code></td>
-                            <td>Yes</td>
-                            <td><code>[]</code></td>
-                            <td>an array of option objects, requires <code>value</code> and <code>label</code> params</td>
-                        </tr>
-                        <tr>
-                            <td><code>value</code></td>
-                            <td><code>object</code> / <code>array</code></td>
-                            <td>No</td>
-                            <td><code>null</code></td>
-                            <td>an option object / array of option objects, requires <code>value</code> and <code>label</code> params</td>
-                        </tr>
-                        <tr>
-                            <td><code>onChange</code></td>
-                            <td><code>function</code></td>
-                            <td>Yes</td>
-                            <td><code>() => {}</code></td>
-                            <td>a function to be called when the select changes, recieves <code>value</code> as param</td>
-                        </tr>
-                        <tr>
-                            <td><code>onSearch</code></td>
-                            <td><code>function</code></td>
-                            <td>No</td>
-                            <td></td>
-                            <td>a function to be called when the user searches, recieves <code>term</code> as param. used for ajaxing in options</td>
-                        </tr>
-                        <tr>
-                            <td><code>multi</code></td>
-                            <td><code>bool</code></td>
-                            <td>No</td>
-                            <td><code>false</code></td>
-                            <td>allow multiple options</td>
-                        </tr>
-                        <tr>
-                            <td><code>placeholder</code></td>
-                            <td><code>string</code></td>
-                            <td>No</td>
-                            <td>Please select...</td>
-                            <td>placeholder to display</td>
-                        </tr>
-                        <tr>
-                            <td><code>clearable</code></td>
-                            <td><code>bool</code></td>
-                            <td>No</td>
-                            <td><code>true</code></td>
-                            <td>wether the user can clear the select once an option is sselected</td>
-                        </tr>
-                        <tr>
-                            <td><code>searchable</code></td>
-                            <td><code>bool</code></td>
-                            <td>No</td>
-                            <td><code>true</code></td>
-                            <td>wether the user can search to filter the list</td>
-                        </tr>
-                        <tr>
-                            <td><code>required</code></td>
-                            <td><code>bool</code></td>
-                            <td>No</td>
-                            <td><code>false</code></td>
-                            <td>adds HTML5 required attribute to inputs</td>
-                        </tr>
-                        <tr>
-                            <td><code>name</code></td>
-                            <td><code>string</code></td>
-                            <td>No</td>
-                            <td><code>react-selectron-value</code></td>
-                            <td>HTML name attribute added to the hidden input</td>
-                        </tr>
-                    </tbody>
-                </table>
+    <div style="background-color: #efefef;">
+        <div class="container container--wide">
+            <h1>Options</h1>
+            <table>
+                <thead>
+                    <th>Prop</th>
+                    <th>Type</th>
+                    <th>Required</th>
+                    <th>Default</th>
+                    <th>Description</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>options</code></td>
+                        <td><code>array</code></td>
+                        <td>Yes</td>
+                        <td><code>[]</code></td>
+                        <td>an array of option objects, requires <code>value</code> and <code>label</code> params</td>
+                    </tr>
+                    <tr>
+                        <td><code>value</code></td>
+                        <td><code>object</code> / <code>array</code></td>
+                        <td>No</td>
+                        <td><code>null</code></td>
+                        <td>an option object / array of option objects, requires <code>value</code> and <code>label</code> params</td>
+                    </tr>
+                    <tr>
+                        <td><code>onChange</code></td>
+                        <td><code>function</code></td>
+                        <td>Yes</td>
+                        <td><code>() => {}</code></td>
+                        <td>a function to be called when the select changes, recieves <code>value</code> as param</td>
+                    </tr>
+                    <tr>
+                        <td><code>onSearch</code></td>
+                        <td><code>function</code></td>
+                        <td>No</td>
+                        <td></td>
+                        <td>a function to be called when the user searches, recieves <code>term</code> as param. used for ajaxing in options</td>
+                    </tr>
+                    <tr>
+                        <td><code>multi</code></td>
+                        <td><code>bool</code></td>
+                        <td>No</td>
+                        <td><code>false</code></td>
+                        <td>allow multiple options</td>
+                    </tr>
+                    <tr>
+                        <td><code>placeholder</code></td>
+                        <td><code>string</code></td>
+                        <td>No</td>
+                        <td>Please select...</td>
+                        <td>placeholder to display</td>
+                    </tr>
+                    <tr>
+                        <td><code>clearable</code></td>
+                        <td><code>bool</code></td>
+                        <td>No</td>
+                        <td><code>true</code></td>
+                        <td>wether the user can clear the select once an option is sselected</td>
+                    </tr>
+                    <tr>
+                        <td><code>searchable</code></td>
+                        <td><code>bool</code></td>
+                        <td>No</td>
+                        <td><code>true</code></td>
+                        <td>wether the user can search to filter the list</td>
+                    </tr>
+                    <tr>
+                        <td><code>required</code></td>
+                        <td><code>bool</code></td>
+                        <td>No</td>
+                        <td><code>false</code></td>
+                        <td>adds HTML5 required attribute to inputs</td>
+                    </tr>
+                    <tr>
+                        <td><code>name</code></td>
+                        <td><code>string</code></td>
+                        <td>No</td>
+                        <td><code>react-selectron-value</code></td>
+                        <td>HTML name attribute added to the hidden input</td>
+                    </tr>
+                </tbody>
+            </table>
          </div>
      </div>
+     <footer>&copy; 2017 @dahliacreative</footer>
     <script src="examples.js"></script>
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>
 </html>
