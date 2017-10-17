@@ -261,7 +261,7 @@ class Select extends React.Component {
   }
 
   render() {
-    const { placeholder, multi, clearable, searchable } = this.props
+    const { placeholder, multi, clearable, searchable, name } = this.props
     const { isOpen, isFocused, value, highlighted, options, searchTerm, loading, displayNoResults } = this.state
     const onChange = multi ? this.multiOnChange : this.props.onChange
 
@@ -327,6 +327,11 @@ class Select extends React.Component {
             </ul>
           </Options>
         }
+        { multi ? (
+          <input type="hidden" name={ name } value={ value ? value.map(val => val.value ).join(',') : '' } />
+        ) : (
+          <input type="hidden" name={ name } value={ value ? value.value : '' } />
+        )}
       </div>
     )
   }

@@ -40,7 +40,8 @@ Selectron.propTypes = {
   multi: PropTypes.bool,
   placeholder: PropTypes.string,
   required: PropTypes.bool,
-  searchable: PropTypes.bool
+  searchable: PropTypes.bool,
+  name: PropTypes.string
 }
 
 Selectron.defaultProps = {
@@ -52,7 +53,8 @@ Selectron.defaultProps = {
   required: false,
   onChange: () => {},
   options: [],
-  value: null
+  value: null,
+  name: 'react-selectron-value'
 }
 
 export default Selectron

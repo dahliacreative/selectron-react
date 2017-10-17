@@ -20,7 +20,9 @@ class Options extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.renderOptions(nextProps)
+    setTimeout(() => {
+        this.renderOptions(nextProps)
+    }, 0)
   }
 
   renderOptions(props) {
