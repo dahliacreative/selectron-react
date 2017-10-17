@@ -68,6 +68,9 @@ $transition-duration: 0s
         color: $base
         cursor: pointer
         display: block
+        line-height: 1
+        margin: 0
+        min-height: 36px
         outline: none
         overflow: hidden
         padding: 10px 30px 10px 10px
@@ -83,9 +86,7 @@ $transition-duration: 0s
             padding-right: 45px
 
         .selectron--multiple.selectron--is-filled &
-            margin-bottom: -5px
-            min-height: 41px
-            padding: 5px
+            padding: 0 5px 5px
 
     &__options
         background-color: $white
@@ -94,11 +95,11 @@ $transition-duration: 0s
         border-top: none
         display: flex
         flex-direction: column
-        max-height: 200px
         z-index: 100
 
     &__search
         @extend %font-styles
+        -webkit-appearance: none
         background-color: transparent
         border: none
         color: $brand-dark
@@ -107,15 +108,17 @@ $transition-duration: 0s
         padding: 10px
 
     &__list
+        -webkit-overflow-scrolling: touch
         border-top: 1px solid rgba($base, .5)
         flex: 1
         margin: 0
+        max-height: 200px
         overflow: auto
         padding: 0
         position: relative
 
         &:empty
-            border-top: none
+            display: none
 
     &__option
         @extend %font-styles
@@ -144,8 +147,8 @@ $transition-duration: 0s
         color: $brand
         display: flex
         font-size: 12px
-        margin-bottom: 5px
         margin-right: 5px
+        margin-top: 5px
 
         &-remove
             background-color: transparent
