@@ -29,7 +29,8 @@ class Select extends React.Component {
       'onSearch',
       'multiOnChange',
       'updateScrollPosition',
-      'resize'
+      'resize',
+      'toggleOverflow'
     ].forEach(fn => this[fn] = this[fn].bind(this))
   }
 
@@ -279,9 +280,13 @@ class Select extends React.Component {
     }
   }
 
+  toggleOverflow(toggle = true) {
+    this.setState({ overflowing: toggle })
+  }
+
   render() {
     const { placeholder, multi, clearable, searchable, name } = this.props
-    const { isOpen, isFocused, value, highlighted, options, searchTerm, loading, displayNoResults } = this.state
+    const { isOpen, isFocused, value, highlighted, options, searchTerm, loading, displayNoResults, overflowing } = this.state
     const onChange = multi ? this.multiOnChange : this.props.onChange
 
     const triggerProps = {
@@ -313,6 +318,7 @@ class Select extends React.Component {
     if (clearable) classes.push('is-clearable')
     if (multi) classes.push('multiple')
     if (value) classes.push('is-filled')
+    if (overflowing) classes.push('is-overflowing')
 
     return (
       <div className={ classes.join(' selectron--')} ref={node => { this.select = node }}>
@@ -328,7 +334,7 @@ class Select extends React.Component {
             <div className="selectron__spinner"></div>
         }
         { isOpen &&
-          <Options select={ this.select } ref={node => { this.options = node }} onMount={ this.updateScrollPosition } updateScroll={ this.state.updateScroll }>
+          <Options select={ this.select } ref={node => { this.options = node }} onMount={ this.updateScrollPosition } updateScroll={ this.state.updateScroll } isOverflowing={ overflowing } toggleOverflow={ this.toggleOverflow }>
             { searchable &&
               <Search {...searchProps} ref={node => { this.search = node }}/>
             }

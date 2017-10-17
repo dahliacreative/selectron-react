@@ -7,6 +7,7 @@ class Options extends React.Component {
     this.state = {
       firstRender: true
     }
+    this.checkOverflow = this.checkOverflow.bind(this)
   }
   componentWillMount() {
     this.options = document.createElement('div')
@@ -17,6 +18,13 @@ class Options extends React.Component {
   componentWillUnmount() {
     ReactDOM.unmountComponentAtNode(this.options)
     document.body.removeChild(this.options)
+    window.removeEventListener('scroll', this.checkOverflow)
+    this.props.toggleOverflow(false)
+  }
+
+  checkOverflow() {
+    const docBottom = window.pageYOffset + window.innerHeight
+    this.props.toggleOverflow(this.state.optionsBottom > docBottom)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -29,20 +37,37 @@ class Options extends React.Component {
   }
 
   renderOptions(props) {
-    const { select } = props
+    const { select, isOverflowing } = props
     const style = {
       position: 'absolute',
-      top: select.offsetTop + select.offsetHeight,
       left: select.offsetLeft,
-      width: select.clientWidth
+      width: select.clientWidth,
+      opacity: this.state.firstRender ? 0 : 1
     }
+    if (isOverflowing) {
+      style.bottom = window.innerHeight - select.offsetTop
+    } else {
+      style.top = select.offsetTop + select.offsetHeight
+    }
+    const classes = ['selectron__options']
+    if (isOverflowing) classes.push('is-overflowing')
+    const classNames = classes.join(' selectron__options--')
     ReactDOM.render(
-      <div className="selectron__options" style={ style } ref={node => { this.wrapper = node }}>
+      <div className={ classNames } style={ style } ref={node => { this.wrapper = node }}>
         { props.children }
       </div>
     , this.options, () => {
       if (this.state.firstRender) {
-        this.setState({ firstRender:false }, this.props.onMount)
+        const options = this.wrapper
+        const optionsBottom = options.offsetTop + options.offsetHeight + 20
+        this.setState({
+          firstRender: false,
+          optionsBottom
+        }, () => {
+            this.props.onMount()
+            this.checkOverflow()
+            window.addEventListener('scroll', this.checkOverflow)
+        })
       }
     })
   }

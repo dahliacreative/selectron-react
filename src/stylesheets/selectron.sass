@@ -33,6 +33,10 @@ $transition-duration: 0s
         border-radius: 4px 4px 0 0
         box-shadow: none
 
+    &--is-overflowing
+        &.selectron--is-open
+            border-radius: 0 0 4px 4px
+
     &--multiple &
         &__trigger
             align-items: center
@@ -96,6 +100,18 @@ $transition-duration: 0s
         display: flex
         flex-direction: column
         z-index: 100
+
+        &--is-overflowing
+            border: 1px solid $base
+            border-bottom: none
+            border-radius: 4px 4px 0 0
+
+            .selectron__search
+                order: 1
+
+            .selectron__list
+                border-bottom: 1px solid rgba($base, .5)
+                border-top: none
 
     &__search
         @extend %font-styles
