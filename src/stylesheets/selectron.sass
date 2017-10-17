@@ -20,6 +20,10 @@ $transition-duration: 0s
     transition: border-color $transition-duration, box-shadow $transition-duration
     width: 100%
 
+    > *
+        -webkit-tap-highlight-color: rgba(0,0,0,0)
+        -webkit-tap-highlight-color: transparent
+
     &--is-focused
         border-color: $brand
         box-shadow: 0 0 0 2px rgba($brand, .25)
@@ -39,15 +43,6 @@ $transition-duration: 0s
         &__trigger
             color: $brand-dark
 
-    &.selectron--multiple.selectron--is-filled
-        .selectron__trigger
-            margin-bottom: -5px
-            min-height: 41px
-            padding: 5px
-
-    &.selectron--multiple.selectron--is-clearable
-        .selectron__trigger
-            padding-right: 45px
 
     &::after
         border: 2px solid $base
@@ -74,9 +69,23 @@ $transition-duration: 0s
         cursor: pointer
         display: block
         outline: none
-        padding: 10px
+        overflow: hidden
+        padding: 10px 30px 10px 10px
         text-align: left
+        text-overflow: ellipsis
+        white-space: nowrap
         width: 100%
+
+        .selectron--is-clearable.selectron--is-filled &
+            padding-right: 50px
+
+        .selectron--is-clearable.selectron--is-filled.selectron--multiple &
+            padding-right: 45px
+
+        .selectron--multiple.selectron--is-filled &
+            margin-bottom: -5px
+            min-height: 41px
+            padding: 5px
 
     &__options
         background-color: $white
@@ -110,6 +119,8 @@ $transition-duration: 0s
 
     &__option
         @extend %font-styles
+        -webkit-tap-highlight-color: rgba(0,0,0,0)
+        -webkit-tap-highlight-color: transparent
         cursor: pointer
         font-size: 12px
         padding: 10px

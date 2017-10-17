@@ -28,16 +28,19 @@ class Select extends React.Component {
       'onBlur',
       'onSearch',
       'multiOnChange',
-      'updateScrollPosition'
+      'updateScrollPosition',
+      'resize'
     ].forEach(fn => this[fn] = this[fn].bind(this))
   }
 
   componentWillMount() {
     document.addEventListener('click', this.clickOutside)
+    window.addEventListener('resize', this.resize)
   }
 
   componentWillUnmount() {
     document.removeEventListener('click', this.clickOutside)
+    window.removeEventListener('resize', this.resize)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -77,6 +80,12 @@ class Select extends React.Component {
       this.setState({
         updateScroll: false
       })
+    }
+  }
+
+  resize() {
+    if (this.state.isOpen) {
+      this.closeOptions()
     }
   }
 
