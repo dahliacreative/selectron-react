@@ -27,7 +27,8 @@ class Select extends React.Component {
       'onFocus',
       'onBlur',
       'onSearch',
-      'multiOnChange'
+      'multiOnChange',
+      'updateScrollPosition'
     ].forEach(fn => this[fn] = this[fn].bind(this))
   }
 
@@ -74,7 +75,8 @@ class Select extends React.Component {
   toggleOptions(e, toggle = !this.state.isOpen) {
     if (e) e.preventDefault()
     this.setState({
-      isOpen: toggle
+      isOpen: toggle,
+      updateScrollPosition: toggle
     })
   }
 
@@ -101,6 +103,30 @@ class Select extends React.Component {
     this.trigger.button.focus()
   }
 
+  updateScrollPosition() {
+    const node = this[`option-${this.state.highlighted.value}`].option
+    const item = {
+        node: node,
+        top: node.offsetTop,
+        bottom: node.offsetTop + node.offsetHeight,
+        height: node.offsetHeight,
+        index: this.state.options.indexOf(this.state.highlighted)
+    }
+    const list = {
+        node: this.list,
+        height: this.list.offsetHeight,
+        scroll: this.list.scrollTop,
+        scrollHeight: this.list.scrollHeight
+    }
+    if (item.index === this.state.options.length -1) {
+      list.node.scrollTop = list.scrollHeight
+    } else if (item.bottom - list.scroll > list.height) {
+      list.node.scrollTop = item.top - (list.height - item.height)
+    } else if(item.top < list.scroll) {
+      list.node.scrollTop = item.top
+    }
+  }
+
   onKeyDown(e) {
     const { isOpen, highlighted, options } = this.state
     switch (e.which) {
@@ -122,18 +148,7 @@ class Select extends React.Component {
           const nextIndex = currentIndex === 0 ? options.length - 1 : currentIndex - 1
           this.setState({
             highlighted: options[nextIndex]
-          }, () => {
-            const item = this[`option-${this.state.highlighted.value}`].option
-            const itemTop = item.offsetTop
-            const listTop = this.list.scrollTop
-            if (nextIndex === options.length - 1) {
-              const scrollTo = this.list.scrollHeight
-              this.list.scrollTop = scrollTo
-            } else if (itemTop < listTop) {
-              const scrollTo = itemTop
-              this.list.scrollTop = scrollTo
-            }
-          })
+          }, this.updateScrollPosition)
         }
         break
       }
@@ -145,15 +160,7 @@ class Select extends React.Component {
           const nextIndex = currentIndex === options.length - 1 ? 0 : currentIndex + 1
           this.setState({
             highlighted: options[nextIndex]
-          }, () => {
-            const item = this[`option-${this.state.highlighted.value}`].option
-            const itemBottom = item.offsetTop + item.offsetHeight
-            const listBottom = this.list.offsetHeight - this.list.scrollTop
-            if (itemBottom > listBottom) {
-              const scrollTo = item.offsetTop - (this.list.offsetHeight - item.offsetHeight)
-              this.list.scrollTop = scrollTo
-            }
-          })
+          }, this.updateScrollPosition)
         }
         break
       }
@@ -298,7 +305,7 @@ class Select extends React.Component {
             <div className="selectron__spinner"></div>
         }
         { isOpen &&
-          <Options select={ this.select } ref={node => { this.options = node }}>
+          <Options select={ this.select } ref={node => { this.options = node }} onMount={ this.updateScrollPosition }>
             { searchable &&
               <Search {...searchProps} ref={node => { this.search = node }}/>
             }

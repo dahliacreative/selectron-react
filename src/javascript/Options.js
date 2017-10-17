@@ -2,6 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 class Options extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      firstRender: true
+    }
+  }
   componentDidMount() {
     this.options = document.createElement('div')
     document.body.appendChild(this.options)
@@ -29,7 +35,11 @@ class Options extends React.Component {
       <div className="selectron__options" style={ style } ref={node => { this.wrapper = node }}>
         { props.children }
       </div>
-    , this.options)
+    , this.options, () => {
+      if (this.state.firstRender) {
+        this.setState({ firstRender:false }, this.props.onMount)
+      }
+    })
   }
 
   render() {
