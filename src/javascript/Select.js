@@ -270,7 +270,7 @@ class Select extends React.Component {
       currentValue.push(value)
       if (options.length > 1) {
         const index = options.findIndex(opt => opt.value === value.value)
-        const newHighlight = options[index + 1]
+        const newHighlight = index + 1 > options.length - 1 ? options[index - 1] : options[index + 1]
         this.setState({ highlighted: newHighlight }, () => {
           onChange(currentValue.slice(0))
         })
