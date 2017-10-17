@@ -104,13 +104,17 @@ class Select extends React.Component {
   }
 
   updateScrollPosition() {
+    const { options } = this.state
+    if (options.length < 1) {
+      return
+    }
     const node = this[`option-${this.state.highlighted.value}`].option
     const item = {
         node: node,
         top: node.offsetTop,
         bottom: node.offsetTop + node.offsetHeight,
         height: node.offsetHeight,
-        index: this.state.options.indexOf(this.state.highlighted)
+        index: options.indexOf(this.state.highlighted)
     }
     const list = {
         node: this.list,
