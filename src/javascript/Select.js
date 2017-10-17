@@ -72,6 +72,14 @@ class Select extends React.Component {
     }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.updateScroll) {
+      this.setState({
+        updateScroll: false
+      })
+    }
+  }
+
   toggleOptions(e, toggle = !this.state.isOpen) {
     if (e) e.preventDefault()
     this.setState({
@@ -151,8 +159,9 @@ class Select extends React.Component {
           const currentIndex = options.map(opt => opt.value).indexOf(highlighted.value)
           const nextIndex = currentIndex === 0 ? options.length - 1 : currentIndex - 1
           this.setState({
-            highlighted: options[nextIndex]
-          }, this.updateScrollPosition)
+            highlighted: options[nextIndex],
+            updateScroll: true
+          })
         }
         break
       }
@@ -163,8 +172,9 @@ class Select extends React.Component {
           const currentIndex = options.map(opt => opt.value).indexOf(highlighted.value)
           const nextIndex = currentIndex === options.length - 1 ? 0 : currentIndex + 1
           this.setState({
-            highlighted: options[nextIndex]
-          }, this.updateScrollPosition)
+            highlighted: options[nextIndex],
+            updateScroll: true
+          })
         }
         break
       }
@@ -309,7 +319,7 @@ class Select extends React.Component {
             <div className="selectron__spinner"></div>
         }
         { isOpen &&
-          <Options select={ this.select } ref={node => { this.options = node }} onMount={ this.updateScrollPosition }>
+          <Options select={ this.select } ref={node => { this.options = node }} onMount={ this.updateScrollPosition } updateScroll={ this.state.updateScroll }>
             { searchable &&
               <Search {...searchProps} ref={node => { this.search = node }}/>
             }

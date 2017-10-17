@@ -8,7 +8,7 @@ class Options extends React.Component {
       firstRender: true
     }
   }
-  componentDidMount() {
+  componentWillMount() {
     this.options = document.createElement('div')
     document.body.appendChild(this.options)
     this.renderOptions(this.props)
@@ -21,7 +21,10 @@ class Options extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     setTimeout(() => {
-        this.renderOptions(nextProps)
+      this.renderOptions(nextProps)
+      if (nextProps.updateScroll) {
+        this.props.onMount()
+      }
     }, 0)
   }
 
