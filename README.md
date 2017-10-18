@@ -1,10 +1,18 @@
 # Selectron React
 ### A *simple* select replacement component built with & for React.Js
 
+I built this select replacement as I was frustrated with the UX other react select replacements offered. I found other solutions over engineered, complicated to use and ultimatley not user friendly.
+
+See some examples / docs at [https://dahliacreative.github.io/selectron-react/](https://dahliacreative.github.io/selectron-react/)  
+
 ## Installation
-```npm install selectron-react``` 
+```
+npm install selectron-react
+``` 
 or  
-```yarn add selectron-react```
+```
+yarn add selectron-react
+```
 
 ## Usage
 ```
