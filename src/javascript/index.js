@@ -54,7 +54,7 @@ Selectron.defaultProps = {
   onChange: () => {},
   options: [],
   value: null,
-  name: 'react-selectron-value'
+  name: 'selectron-react-value'
 }
 
 export default Selectron
