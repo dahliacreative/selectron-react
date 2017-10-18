@@ -1,8 +1,9 @@
 {
   "name": "selectron-react",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A select replacement component built with & for React",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "style": "lib/selectron.css",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
