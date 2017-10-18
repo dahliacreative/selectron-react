@@ -1,4 +1,4 @@
-# React Selectron
+# Selectron React
 ### A *simple* select replacement component built with & for React.Js
 
 ## Installation
