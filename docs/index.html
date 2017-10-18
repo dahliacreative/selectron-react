@@ -2,7 +2,7 @@
 <html>
   <head>
     <link rel="stylesheet" href="selectron.css">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600" rel="stylesheet">
     <meta name="viewport" content="width=device-width initial-scale=1.0 user-scalable=no">
     <style>
         body {
@@ -52,6 +52,8 @@
         table {
             width: 100%;
             border-collapse: collapse;
+        }
+        tr {
             background-color: #fff;
         }
         td,th {
@@ -99,6 +101,45 @@
         }
         pre {
             margin: 0;
+        }
+        @media (max-width: 767px) {
+            header h1 {
+                font-size: 40px;
+            }
+            .container {
+                padding: 40px 10px;
+            }
+            thead {
+                display: none;
+            }
+            tbody, tr {
+                display: block;
+                font-size: 12px;
+            }
+            td {
+                border: none;
+                border-bottom: 1px solid #efefef;
+                padding: 5px 10px;
+                display: flex;
+            }
+            td div {
+                flex: 2;
+            }
+            td:last-child {
+                border-bottom: none;
+            }
+            td::before {
+                content: attr(data-title);
+                text-transform: capitalize;
+                color: #FE5E64;
+                font-weight: 600;
+                flex: 1;
+                margin-right: 20px;
+            }
+            tr {
+                margin-bottom: 10px;
+                border: 1px solid #FE5E64;
+            }
         }
     </style>
   </head>
@@ -182,74 +223,130 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><code>options</code></td>
-                        <td><code>array</code></td>
-                        <td>Yes</td>
-                        <td><code>[]</code></td>
-                        <td>an array of option objects, requires <code>value</code> and <code>label</code> params</td>
+                        <td data-title="prop"><div>
+                            <code>options</code>
+                        </div></td>
+                        <td data-title="type"><div>
+                            <code>array</code>
+                        </div></td>
+                        <td data-title="required"><div>Yes</div></td>
+                        <td data-title="default"><div>
+                            <code>[]</code>
+                        </div></td>
+                        <td data-title="description"><div>an array of option objects, requires <code>value</code> and <code>label</code> params</div></td>
                     </tr>
                     <tr>
-                        <td><code>value</code></td>
-                        <td><code>object</code> / <code>array</code></td>
-                        <td>No</td>
-                        <td><code>null</code></td>
-                        <td>an option object / array of option objects, requires <code>value</code> and <code>label</code> params</td>
+                        <td data-title="prop"><div>
+                            <code>value</code>
+                        </div></td>
+                        <td data-title="type"><div>
+                            <code>object</code> / <code>array</code>
+                        </div></td>
+                        <td data-title="required"><div>No</div></td>
+                        <td data-title="default"><div>
+                            <code>null</code>
+                        </div></td>
+                        <td data-title="description"><div>an option object / array of option objects, requires <code>value</code> and <code>label</code> params</div></td>
                     </tr>
                     <tr>
-                        <td><code>onChange</code></td>
-                        <td><code>function</code></td>
-                        <td>Yes</td>
-                        <td><code>() => {}</code></td>
-                        <td>a function to be called when the select changes, recieves <code>value</code> as param</td>
+                        <td data-title="prop"><div>
+                            <code>onChange</code>
+                        </div></td>
+                        <td data-title="type"><div>
+                            <code>function</code>
+                        </div></td>
+                        <td data-title="required"><div>Yes</div></td>
+                        <td data-title="default"><div>
+                            <code>() => {}</code>
+                        </div></td>
+                        <td data-title="description"><div>a function to be called when the select changes, recieves <code>value</code> as param</div></td>
                     </tr>
                     <tr>
-                        <td><code>onSearch</code></td>
-                        <td><code>function</code></td>
-                        <td>No</td>
-                        <td></td>
-                        <td>a function to be called when the user searches, recieves <code>term</code> as param. used for ajaxing in options</td>
+                        <td data-title="prop"><div>
+                            <code>onSearch</code>
+                        </div></td>
+                        <td data-title="type"><div>
+                            <code>function</code>
+                        </div></td>
+                        <td data-title="required"><div>No</div></td>
+                        <td data-title="default"></td>
+                        <td data-title="description"><div>a function to be called when the user searches, recieves <code>term</code> as param. used for ajaxing in options</div></td>
                     </tr>
                     <tr>
-                        <td><code>multi</code></td>
-                        <td><code>bool</code></td>
-                        <td>No</td>
-                        <td><code>false</code></td>
-                        <td>allow multiple options</td>
+                        <td data-title="prop"><div>
+                            <code>multi</code>
+                        </div></td>
+                        <td data-title="type"><div>
+                            <code>bool</code>
+                        </div></td>
+                        <td data-title="required"><div>No</div></td>
+                        <td data-title="default"><div>
+                            <code>false</code>
+                        </div></td>
+                        <td data-title="description"><div>allow multiple options</div></td>
                     </tr>
                     <tr>
-                        <td><code>placeholder</code></td>
-                        <td><code>string</code></td>
-                        <td>No</td>
-                        <td>Please select...</td>
-                        <td>placeholder to display</td>
+                        <td data-title="prop"><div>
+                            <code>placeholder</code>
+                        </div></td>
+                        <td data-title="type"><div>
+                            <code>string</code>
+                        </div></td>
+                        <td data-title="required"><div>No</div></td>
+                        <td data-title="default"><div>Please select...</div></td>
+                        <td data-title="description"><div>placeholder to display</div></td>
                     </tr>
                     <tr>
-                        <td><code>clearable</code></td>
-                        <td><code>bool</code></td>
-                        <td>No</td>
-                        <td><code>true</code></td>
-                        <td>wether the user can clear the select once an option is sselected</td>
+                        <td data-title="prop"><div>
+                            <code>clearable</code>
+                        </div></td>
+                        <td data-title="type"><div>
+                            <code>bool</code>
+                        </div></td>
+                        <td data-title="required"><div>No</div></td>
+                        <td data-title="default"><div>
+                            <code>true</code>
+                        </div></td>
+                        <td data-title="description"><div>wether the user can clear the select once an option is sselected</div></td>
                     </tr>
                     <tr>
-                        <td><code>searchable</code></td>
-                        <td><code>bool</code></td>
-                        <td>No</td>
-                        <td><code>true</code></td>
-                        <td>wether the user can search to filter the list</td>
+                        <td data-title="prop"><div>
+                            <code>searchable</code>
+                        </div></td>
+                        <td data-title="type"><div>
+                            <code>bool</code>
+                        </div></td>
+                        <td data-title="required"><div>No</div></td>
+                        <td data-title="default"><div>
+                            <code>true</code>
+                        </div></td>
+                        <td data-title="description"><div>wether the user can search to filter the list</div></td>
                     </tr>
                     <tr>
-                        <td><code>required</code></td>
-                        <td><code>bool</code></td>
-                        <td>No</td>
-                        <td><code>false</code></td>
-                        <td>adds HTML5 required attribute to inputs</td>
+                        <td data-title="prop"><div>
+                            <code>required</code>
+                        </div></td>
+                        <td data-title="type"><div>
+                            <code>bool</code>
+                        </div></td>
+                        <td data-title="required"><div>No</div></td>
+                        <td data-title="default"><div>
+                            <code>false</code>
+                        </div></td>
+                        <td data-title="description"><div>adds HTML5 required attribute to inputs</div></td>
                     </tr>
                     <tr>
-                        <td><code>name</code></td>
-                        <td><code>string</code></td>
-                        <td>No</td>
-                        <td><code>react-selectron-value</code></td>
-                        <td>HTML name attribute added to the hidden input</td>
+                        <td data-title="prop"><div>
+                            <code>name</code>
+                        </div></td>
+                        <td data-title="type"><div>
+                            <code>string</code>
+                        </div></td>
+                        <td data-title="required"><div>No</div></td>
+                        <td data-title="default"><div>
+                            <code>react-selectron-value</code>
+                        </div></td>
+                        <td data-title="description"><div>HTML name attribute added to the hidden input</div></td>
                     </tr>
                 </tbody>
             </table>
