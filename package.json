@@ -1,5 +1,5 @@
 {
-  "name": "react-selectron",
+  "name": "selectron-react",
   "version": "1.0.0",
   "description": "A select replacement component built with & for React",
   "main": "index.js",
@@ -8,11 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://www.github.com/dahliacreative/react-selectron"
+    "url": "http://www.github.com/dahliacreative/selectron-react"
   },
   "keywords": [
     "React",
-    "Select"
+    "Select",
+    "Combobox",
+    "Dropdown",
+    "Component"
   ],
   "author": "Simon Sturgess <simon@dahliacreative.com> (http://www.dahliacreative.com)",
   "license": "ISC",
