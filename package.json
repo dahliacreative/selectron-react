@@ -1,6 +1,6 @@
 {
   "name": "selectron-react",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A select replacement component built with & for React",
   "main": "lib/index.js",
   "style": "lib/selectron.css",
