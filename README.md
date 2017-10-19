@@ -47,3 +47,10 @@ yarn add selectron-react
 | searchable  | bool         | No       | true                  | allows user to filter the options list                                                              |
 | required    | bool         | No       | false                 | adds HTML5 required attribute to hidden inputs                                                      |
 | name        | string       | No       | selectron-react-value | HTML name attribute add to hidden fields                                                            |
+
+
+## License
+
+Copyright (c) 2017 Simon Sturgess
+
+Licensed under the MIT license.
