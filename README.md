@@ -1,3 +1,6 @@
+# !!! NOT ACTIVELY MAINTAINED !!!
+I am no longer maintaining this proejct, if you want to take over, feel free to drop me a msg. I recommend you use reavt-select v2.
+
 # Selectron React
 ### A *simple* select replacement component built with & for React.Js
 
